@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agência Carla - Material de Ajuda</title>
+  <meta name="description" content="Portal de ajuda para criadoras e hosts da Agência Carla. Aprenda as regras, dicas e processos do app em um só lugar." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+  <style>
+    :root {
+      --rosa: #e91e8c;
+      --rosa-claro: #f8a5d0;
+      --rosa-suave: #fce4f0;
+      --rosa-hover: #c2185b;
+      --lilas: #9c27b0;
+      --bg: #fff8fc;
+      --bg-card: #ffffff;
+      --texto: #3a1f2e;
+      --texto-suave: #7b5068;
+      --borda: #f0cde0;
+      --shadow: rgba(233,30,140,0.10);
+      --gradient: linear-gradient(135deg, #e91e8c 0%, #9c27b0 100%);
+    }
+    [data-theme='dark'] {
+      --bg: #1a0d14;
+      --bg-card: #2a1520;
+      --texto: #f9e4f1;
+      --texto-suave: #d4a5c5;
+      --borda: #4a2840;
+      --shadow: rgba(233,30,140,0.18);
+      --rosa-suave: #3a1530;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--texto);
+      transition: background .3s, color .3s;
+      min-height: 100vh;
+    }
+    /* HEADER */
+    header {
+      background: var(--gradient);
+      padding: 2rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+    header .emoji { font-size: 2.4rem; display: block; margin-bottom: .5rem; }
+    header h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.5px;
+      line-height: 1.2;
+    }
+    header p {
+      margin-top: .6rem;
+      font-size: .95rem;
+      color: rgba(255,255,255,.85);
+    }
+    .theme-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,.2);
+      border: none;
+      border-radius: 50%;
+      width: 2.2rem;
+      height: 2.2rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .theme-btn:hover { background: rgba(255,255,255,.35); }
+    /* MAIN */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    .intro p {
+      color: var(--texto-suave);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+    /* ACCORDION */
+    .accordion { display: flex; flex-direction: column; gap: .75rem; }
+    .item {
+      background: var(--bg-card);
+      border: 1.5px solid var(--borda);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 12px var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .item:hover { box-shadow: 0 4px 22px var(--shadow); }
+    .item-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      padding: 1.1rem 1.2rem;
+      text-align: left;
+      color: var(--texto);
+    }
+    .item-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      width: 2.2rem;
+      text-align: center;
+    }
+    .item-title {
+      flex: 1;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--texto);
+    }
+    .item-arrow {
+      color: var(--rosa);
+      font-size: 1.1rem;
+      transition: transform .3s ease;
+      flex-shrink: 0;
+    }
+    .item.open .item-arrow { transform: rotate(180deg); }
+    .item-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0 1.2rem;
+    }
+    .item.open .item-body {
+      max-height: 2000px;
+      padding: 0 1.2rem 1.4rem;
+    }
+    .item-body-inner {
+      border-top: 1.5px solid var(--borda);
+      padding-top: 1rem;
+      font-size: .93rem;
+      line-height: 1.75;
+      color: var(--texto-suave);
+    }
+    .item-body-inner h3 {
+      color: var(--rosa);
+      font-size: .88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: 1rem 0 .4rem;
+    }
+    .item-body-inner h3:first-child { margin-top: 0; }
+    .item-body-inner ul {
+      padding-left: 1.3rem;
+      margin: .3rem 0 .7rem;
+    }
+    .item-body-inner ul li { margin-bottom: .3rem; }
+    .item-body-inner .tag {
+      display: inline-block;
+      background: var(--rosa-suave);
+      color: var(--rosa-hover);
+      border-radius: .4rem;
+      padding: .15rem .5rem;
+      font-size: .8rem;
+      font-weight: 700;
+      margin-right: .3rem;
+    }
+    .item-body-inner .alerta {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      border-radius: .4rem;
+      padding: .6rem .9rem;
+      margin: .6rem 0;
+      font-size: .88rem;
+      color: #5d3a00;
+    }
+    [data-theme='dark'] .item-body-inner .alerta {
+      background: #2a1d0a;
+      color: #ffd58a;
+    }
+    .item-body-inner .ok {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      border-radius: .4rem;
+      padding: .6rem .9rem;
+      margin: .6rem 0;
+      font-size: .88rem;
+      color: #1b5e20;
+    }
+    [data-theme='dark'] .item-body-inner .ok {
+      background: #0d2010;
+      color: #a5d6a7;
+    }
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem 2.5rem;
+      font-size: .82rem;
+      color: var(--texto-suave);
+      border-top: 1px solid var(--borda);
+    }
+    footer a { color: var(--rosa); text-decoration: none; }
+    /* SEARCH */
+    .search-wrap {
+      margin-bottom: 1.6rem;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: .75rem 1rem .75rem 2.8rem;
+      border: 1.5px solid var(--borda);
+      border-radius: 2rem;
+      font-size: .95rem;
+      background: var(--bg-card);
+      color: var(--texto);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-wrap input:focus { border-color: var(--rosa); }
+    .search-wrap .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      pointer-events: none;
+      color: var(--rosa);
+    }
+    @media (max-width: 480px) {
+      header { padding: 1.6rem 1rem 2rem; }
+      main { padding: 1.2rem .75rem 3rem; }
+      .item-btn { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="theme-btn" id="themeBtn" title="Alternar modo claro/escuro" aria-label="Alternar tema">🌙</button>
+    <span class="emoji">🌸</span>
+    <h1>Agência Carla<br>Material de Ajuda</h1>
+    <p>Tudo que você precisa saber para arrasar no app 💖</p>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>Clique em qualquer tópico abaixo para ler o conteúdo. Simples assim! 🌷</p>
+    </div>
+
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="searchInput" placeholder="Buscar tópico..." aria-label="Buscar tópico" />
+    </div>
+
+    <div class="accordion" id="accordion">
+
+      <!-- 1 -->
+      <div class="item" data-keywords="tipos chamadas lupa deusa amigo presentes moedas">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">📞</span>
+          <span class="item-title">Tipos de Chamadas (Importantíssimo!)</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <p>Existem <strong>3 tipos de chamadas</strong> no app. Saber a diferença é essencial para não levar banimento!</p>
+            <h3>📱 1. Chamada da Lupa / Explorar</h3>
+            <ul>
+              <li>Serve para conhecer pessoas novas e adicionar como amigas.</li>
+              <li>O app manda muita gente pra conversar com você.</li>
+              <li><strong>Não ganha moedas aqui.</strong></li>
+              <li>É <strong>100% monitorada</strong> — apareça direitinho na câmera.</li>
+            </ul>
+            <h3>👑 2. Chamada da Deusa</h3>
+            <ul>
+              <li>Você ganha <strong>80 moedas por minuto</strong>.</li>
+              <li>As pessoas te ligam pelos seus vídeos.</li>
+              <li>É <strong>100% monitorada</strong> — apareça direitinho na câmera.</li>
+            </ul>
+            <h3>🤝 3. Chamada de Amigo</h3>
+            <ul>
+              <li>É a que <strong>mais dá moedas</strong>.</li>
+              <li>São pessoas que já conversaram com você antes.</li>
+              <li>Ganha de <strong>80 a 120 moedas/minuto</strong>.</li>
+              <li>Só o <strong>primeiro minuto é monitorado</strong> — depois você fica mais à vontade.</li>
+            </ul>
+            <h3>🎁 Presentes</h3>
+            <p>Durante as chamadas, as pessoas podem enviar presentes que viram moedas. Você pode pedir ou esperar ganhar — os dois jeitos funcionam!</p>
+            <div class="alerta">⚠️ <strong>SEMPRE veja</strong> qual tipo de chamada está atendendo para não confundir e levar banimento. O chat é 100% monitorado em TODAS as chamadas!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="item" data-keywords="monitoria regras proibido roupa sensual camera emojis punicoes advertencia">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">👀</span>
+          <span class="item-title">O Que a Monitoria Está de Olho?</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>🚫 Roupa</h3>
+            <ul><li>Decote ou roupa sensual é proibido.</li></ul>
+            <h3>🚫 Comportamento</h3>
+            <ul>
+              <li>Nada sensual ou com duplo sentido.</li>
+              <li>Nada de insinuação sexual.</li>
+            </ul>
+            <h3>🚫 Na Câmera</h3>
+            <ul>
+              <li>Não sumir da tela.</li>
+              <li>Não ficar no escuro.</li>
+              <li>Não usar máscara ou esconder o rosto.</li>
+            </ul>
+            <h3>🚫 Outras Coisas Proibidas</h3>
+            <ul>
+              <li>Aparecer com outras pessoas, crianças ou animais.</li>
+              <li>Passar dados pessoais ou bancários.</li>
+              <li>Falar que trabalha para a plataforma.</li>
+              <li>Usar emojis com duplo sentido (🍆 🍑 🍌 etc.)</li>
+            </ul>
+            <h3>✅ Como Não Errar</h3>
+            <ul>
+              <li>Foque no seu rosto 📸</li>
+              <li>Use roupa normal (sem decote)</li>
+              <li>Ambiente claro 💡</li>
+              <li>Fique sempre visível</li>
+            </ul>
+            <div class="ok">💡 Se sua roupa for decotada → aproxime a câmera do rosto!</div>
+            <h3>⚠️ Punições</h3>
+            <ul>
+              <li>1 advertência: <strong>-10% do salário</strong></li>
+              <li>2 advertências: <strong>-30%</strong> + risco de banimento total do app</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="item" data-keywords="pagamento moedas meta 11000 semana sexta salario">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">💰</span>
+          <span class="item-title">Como Funciona o Pagamento?</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>🎯 Meta Semanal</h3>
+            <p>Para receber o pagamento na semana seguinte, você precisa atingir <strong>11.000 moedas</strong> de segunda a domingo.</p>
+            <div class="alerta">⚠️ No domingo as moedas são zeradas no app para o cálculo — mas não se assuste! Elas ficam guardadas no sistema.</div>
+            <h3>✅ Se você bateu 11 mil</h3>
+            <p>Recebe o pagamento na <strong>sexta-feira da semana seguinte</strong>. 🎉</p>
+            <h3>❌ Se não bateu 11 mil</h3>
+            <p>Suas moedas ficam guardadas e você tem mais uma semana para completar. Exemplo: fez 9 mil até domingo → na segunda aparece 0, mas no sistema ainda tem 9 mil → você só precisa fazer mais 2 mil para completar.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="item" data-keywords="cadastro pix dados bancarios cpf nome conta banco">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">🏦</span>
+          <span class="item-title">Cadastro do PIX (Dados Bancários)</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>📍 Como Acessar no App</h3>
+            <p>Vá em <span class="tag">EU</span> → <span class="tag">Central de Lives</span> → role até <span class="tag">Dados Bancários</span></p>
+            <h3>👤 1. A conta tem que ser sua</h3>
+            <ul>
+              <li>✅ Use uma conta no seu nome.</li>
+              <li>❌ Não pode ser da mãe, namorado ou amigo — o dinheiro NÃO cai!</li>
+            </ul>
+            <h3>📝 2. Nome Completo (igual no RG)</h3>
+            <ul>
+              <li>Escreva TODOS os nomes e sobrenomes.</li>
+              <li>Tire todos os acentos e troque ç por c.</li>
+              <li>Exemplo: <em>João Gonçalves da Silva</em> → escreva: <strong>Joao Goncalves da Silva</strong></li>
+            </ul>
+            <h3>🔢 3. CPF</h3>
+            <ul>
+              <li>✅ Só números juntos, sem ponto, traço ou espaço.</li>
+              <li>Exemplo: <strong>12345678900</strong></li>
+            </ul>
+            <h3>🏦 4. Tipo de Chave PIX</h3>
+            <ul>
+              <li>✅ Preferência: PIX com CPF</li>
+              <li>✅ Email ou celular também funcionam</li>
+              <li>❌ Chave aleatória — NÃO PODE</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="item" data-keywords="kyc verificacao identidade documento rg maior de idade">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">🔐</span>
+          <span class="item-title">Verificação KYC (Identidade)</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>📍 Como Acessar no App</h3>
+            <p>Vá em <span class="tag">EU</span> → <span class="tag">Central de Lives</span> → role até <span class="tag">Verificação KYC</span></p>
+            <h3>🔍 O que é KYC?</h3>
+            <p>É para provar que:</p>
+            <ul>
+              <li>✅ Você é maior de idade</li>
+              <li>✅ A conta é sua</li>
+              <li>✅ Você é uma pessoa real (não é fake)</li>
+            </ul>
+            <div class="alerta">⚠️ É obrigatório — todo mundo precisa fazer!</div>
+            <h3>😵 Se der erro (bug) ao escanear o rosto</h3>
+            <div class="ok">✅ Isso é NORMAL! Pode começar a trabalhar normalmente e falar com a agência — a Carla faz manualmente para você.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="item" data-keywords="bonus diario checkin moedas presentinho barra">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">🎁</span>
+          <span class="item-title">Bônus Diário e Check-in</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>🎁 Bônus Diário em Dinheiro</h3>
+            <p>Na tela do app tem um <strong>presentinho vermelho</strong>. Quando você clica nele, abre a tela dos bônus diários.</p>
+            <ul>
+              <li>Conforme você ganha moedas, as barrinhas vão enchendo.</li>
+              <li>Quando a barrinha enche, o botão fica colorido para você coletar o bônus.</li>
+              <li>Esses bônus vão direto para suas moedas do salário! 💖</li>
+            </ul>
+            <h3>✅ Check-in Diário</h3>
+            <ul>
+              <li>Tem um check-in diário de <strong>4.500 moedas</strong>.</li>
+              <li>Fazendo o check-in todo dia, seu engajamento fica muito melhor.</li>
+            </ul>
+            <div class="ok">💡 Rotina: entre no app, clique no presentinho e faça o check-in todos os dias!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="item" data-keywords="niveis salario grupo novata taxa conversao dolar">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">📈</span>
+          <span class="item-title">Níveis e Tipos de Salário</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>Grupos de Conversão</h3>
+            <ul>
+              <li><span class="tag">Grupo N (Novatas)</span> 850 moedas = 1 dólar</li>
+              <li><span class="tag">Grupo 1</span> 750 moedas = 1 dólar — <strong>o melhor grupo, ganha mais!</strong></li>
+            </ul>
+            <p>O grupo sobe ou desce conforme o <strong>tempo médio de chamada nos últimos 14 dias</strong>.</p>
+            <p>O preço da chamada de amigo (80 a 120 moedas/min) depende do seu tempo médio de ontem.</p>
+            <h3>📍 Como Ver Seu Nível no App</h3>
+            <p>Vá em <span class="tag">EU</span> → <span class="tag">Central de Lives</span> → role até <span class="tag">Nível e Taxa de Conversão</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="item" data-keywords="engajamento rotina perfil fotos horario chamadas fluxo">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">🚀</span>
+          <span class="item-title">Como Aumentar Seu Engajamento</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <p>Engajamento é o "sinal" que o app usa para ver se você trabalha direitinho — e aí te manda mais chamadas boas e usuários que gastam mais moedas.</p>
+            <h3>✅ O Que Aumenta o Engajamento</h3>
+            <ul>
+              <li>Ter rotina: usar o app nos mesmos horários todo dia.</li>
+              <li>Perfil completo: <strong>6 fotos + vídeos + bio + interesses + idiomas</strong>.</li>
+              <li>Responder 100% das mensagens no chat.</li>
+              <li>Aceitar 100% dos pedidos de amizade.</li>
+              <li>Bloquear quem não interage, nunca liga ou pede contato externo.</li>
+              <li>Bater a meta mínima de moedas toda semana.</li>
+            </ul>
+            <div class="ok">💡 Quem fica 4 horas seguidas no app faz muito mais moeda do que quem entra e sai o tempo todo!</div>
+            <h3>❌ O Que Destrói o Engajamento</h3>
+            <ul>
+              <li>Entrar e sair do app toda hora.</li>
+              <li>Ficar só 10–15 min e sair.</li>
+              <li>Não bater a meta da semana.</li>
+              <li>Não responder chat / não aceitar amizade.</li>
+              <li>Quebrar regras (conteúdo sensual, dados pessoais, etc.).</li>
+              <li>Levar advertência.</li>
+            </ul>
+            <div class="alerta">⚠️ Quando você não responde e não aceita amizade, o app para de mandar gente nova até você falar com quem já te chamou.</div>
+            <h3>📸 Cuidado com Suas Fotos</h3>
+            <ul>
+              <li>Fotos escuras ou mal tiradas não ajudam.</li>
+              <li>Prefira: boa luz, fundo neutro, foto bonita e clara.</li>
+              <li>Lembra: seu perfil é a sua "loja"! 🛍️</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="item" data-keywords="chat mensagens responder usuario conversar bloquear">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">💬</span>
+          <span class="item-title">Como Usar o Chat com Inteligência</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <p>É pelo chat que você convence o usuário a te ligar. O jeito que você usa o chat mexe diretamente no seu engajamento.</p>
+            <h3>✅ Regras de Ouro no Chat</h3>
+            <ul>
+              <li>Responder <strong>100% das mensagens</strong>.</li>
+              <li>Aceitar <strong>100% das solicitações de amizade</strong>.</li>
+              <li>Tratar todos bem, mesmo quem não tem moeda.</li>
+              <li>Seguir sempre as regras (nada sensual, sem dados pessoais).</li>
+            </ul>
+            <h3>🎯 Como Abordar o Usuário</h3>
+            <p>Não fique só no <em>"oi, me liga"</em>. Pergunte sobre a vida dele como se estivesse conhecendo alguém novo:</p>
+            <ul>
+              <li>Que música ele gosta.</li>
+              <li>Se namora.</li>
+              <li>Filmes favoritos.</li>
+              <li>País, cidade, viagens.</li>
+            </ul>
+            <div class="ok">💡 Quanto mais interesse verdadeiro você mostrar, mais chances dele ligar e voltar depois!</div>
+            <h3>💎 Foco nos Usuários Bons</h3>
+            <p>Usuários que gastam muita moeda geralmente querem atenção e papo. Eles voltam para quem escuta, pergunta e lembra deles.</p>
+            <h3>🚫 Quando Bloquear</h3>
+            <p>Se a pessoa não vai ligar de jeito nenhum e só ocupa espaço no seu fluxo — bloqueie para não prejudicar seu engajamento.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="item" data-keywords="stories videos tiktok filtros musica postagem frequencia">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">🎬</span>
+          <span class="item-title">Stories e Vídeos: Sua Vitrine no App</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <p>Os usuários passam muito tempo vendo stories. Eles viram sua maior fonte de fluxo dentro do app — mais gente te vendo e te chamando!</p>
+            <h3>✅ O Que Fazer nos Vídeos</h3>
+            <ul>
+              <li>Postar stories <strong>todo dia ou quase todo dia</strong>.</li>
+              <li>Gravar em <em>"Faça mais vídeos"</em>.</li>
+              <li>Usar música, filtros, maquiagem, stickers, efeitos — igual ao TikTok!</li>
+            </ul>
+            <div class="ok">🎯 Dica de ouro: quanto mais stories legais, mais o app te mostra e mais gente te vê. Seu story é a vitrine que faz o usuário querer te chamar!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="item" data-keywords="planejamento cronograma horario rotina trabalho dias">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">📅</span>
+          <span class="item-title">Planejamento = Dinheiro no Bolso</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <p>Quando você planeja, você trabalha com seriedade — tipo um emprego de verdade!</p>
+            <h3>✅ 1º Passo: Faça um Cronograma</h3>
+            <ul>
+              <li>Que dias você vai trabalhar?</li>
+              <li>Que horário?</li>
+            </ul>
+            <p>Não tem chefe te fiscalizando? 👉 <strong>Sua chefe é VOCÊ.</strong></p>
+            <h3>🕒 Quanto Tempo Trabalhar?</h3>
+            <p>Não diga <em>"vou trabalhar 10h"</em> se você só consegue 2h. Seja realista — o importante é ser constante!</p>
+            <h3>🚀 Rotina = Mais Ligações</h3>
+            <ul>
+              <li>Quem entra todo dia no mesmo horário → ganha mais fluxo.</li>
+              <li>Quem entra aleatoriamente → ganha menos.</li>
+            </ul>
+            <div class="ok">💡 Se você estivesse trabalhando em um mercado, você iria embora só porque não entrou cliente na primeira hora? No app é igual — fica, insiste, aparece! 💪</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="item" data-keywords="contato carla agencia whatsapp grupo aprovadas email duvidas">
+        <button class="item-btn" aria-expanded="false">
+          <span class="item-icon">📞</span>
+          <span class="item-title">Contato e Dúvidas com a Agência</span>
+          <span class="item-arrow">▼</span>
+        </button>
+        <div class="item-body" role="region">
+          <div class="item-body-inner">
+            <h3>👥 Grupo das Aprovadas (WhatsApp)</h3>
+            <p>Avisos, promoções e bônus são divulgados aqui. Peça para entrar no grupo!</p>
+            <p><a href="https://chat.whatsapp.com/Dv9YHNrPO6GAyPSJiMyHyG" target="_blank" rel="noopener">👉 Entrar no Grupo das Aprovadas</a></p>
+            <h3>📱 Contato Direto com a Carla</h3>
+            <p>Telefone: <strong>32 99125-0940</strong></p>
+            <p><a href="https://api.whatsapp.com/send?phone=5532991250940" target="_blank" rel="noopener">👉 Chamar a Carla no WhatsApp</a></p>
+            <div class="alerta">⚠️ Se em 24h não responder no WhatsApp, envie um e-mail — pode ter dado algum problema no celular.</div>
+            <h3>📧 E-mail da Agência</h3>
+            <p><a href="mailto:carla.appgringo@gmail.com">carla.appgringo@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </main>
+
+  <footer>
+    <p>🌸 Agência Carla — Material de Ajuda &copy; 2025</p>
+    <p style="margin-top:.4rem">Com carinho para todas as criadoras 💖</p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if (saved) { root.setAttribute('data-theme', saved); themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙'; }
+    themeBtn.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      root.setAttribute('data-theme', isDark ? '' : 'dark');
+      themeBtn.textContent = isDark ? '🌙' : '☀️';
+      localStorage.setItem('theme', isDark ? '' : 'dark');
+    });
+
+    // Accordion
+    document.querySelectorAll('.item-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.item');
+        const wasOpen = item.classList.contains('open');
+        // close all
+        document.querySelectorAll('.item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.item-btn').setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          // smooth scroll
+          setTimeout(() => {
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+        }
+      });
+    });
+
+    // Search / filter
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const q = this.value.toLowerCase().trim();
+      document.querySelectorAll('.item').forEach(item => {
+        const title = item.querySelector('.item-title').textContent.toLowerCase();
+        const keywords = (item.dataset.keywords || '').toLowerCase();
+        const content = item.querySelector('.item-body-inner').textContent.toLowerCase();
+        item.style.display = (!q || title.includes(q) || keywords.includes(q) || content.includes(q)) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
