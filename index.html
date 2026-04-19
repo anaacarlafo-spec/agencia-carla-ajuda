@@ -83,17 +83,20 @@
     .intro {
       text-align: center;
       margin-bottom: 2rem;
-      background: var(--bg-card);
-      border: 1.5px solid var(--borda);
-      border-radius: 1rem;
-      padding: 1rem 1.2rem;
-      box-shadow: 0 4px 18px var(--shadow);
+      padding: .35rem 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      opacity: .88;
+      overflow-x: auto;
     }
     .intro p {
       color: var(--rosa-hover);
-      font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
       font-weight: 700;
-      line-height: 1.7;
+      line-height: 1.4;
+      white-space: nowrap;
     }
     .accordion { display: flex; flex-direction: column; gap: .75rem; }
     .item {
