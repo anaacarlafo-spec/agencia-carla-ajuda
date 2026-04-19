@@ -46,11 +46,12 @@
     }
     header .emoji { font-size: 2.4rem; display: block; margin-bottom: .5rem; }
     header h1 {
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      font-weight: 800;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 900;
       color: #fff;
       letter-spacing: -.5px;
-      line-height: 1.2;
+      line-height: 1.1;
+      text-align: center;
     }
     header p {
       margin-top: .6rem;
@@ -81,12 +82,18 @@
     }
     .intro {
       text-align: center;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border: 1.5px solid var(--borda);
+      border-radius: 1rem;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 18px var(--shadow);
     }
     .intro p {
-      color: var(--texto-suave);
-      font-size: .95rem;
-      line-height: 1.6;
+      color: var(--rosa-hover);
+      font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+      font-weight: 700;
+      line-height: 1.7;
     }
     .accordion { display: flex; flex-direction: column; gap: .75rem; }
     .item {
@@ -205,31 +212,6 @@
       border-top: 1px solid var(--borda);
     }
     footer a { color: var(--rosa); text-decoration: none; }
-    .search-wrap {
-      margin-bottom: 1.6rem;
-      position: relative;
-    }
-    .search-wrap input {
-      width: 100%;
-      padding: .75rem 1rem .75rem 2.8rem;
-      border: 1.5px solid var(--borda);
-      border-radius: 2rem;
-      font-size: .95rem;
-      background: var(--bg-card);
-      color: var(--texto);
-      outline: none;
-      transition: border-color .2s;
-    }
-    .search-wrap input:focus { border-color: var(--rosa); }
-    .search-wrap .search-icon {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1rem;
-      pointer-events: none;
-      color: var(--rosa);
-    }
     @media (max-width: 480px) {
       header { padding: 1.6rem 1rem 2rem; }
       main { padding: 1.2rem .75rem 3rem; }
@@ -241,18 +223,13 @@
   <header>
     <button class="theme-btn" id="themeBtn" title="Alternar modo claro/escuro" aria-label="Alternar tema">🌙</button>
     <span class="emoji">🌸</span>
-    <h1>Agência Carla<br>Ajuda para Novatas</h1>
+    <h1>AJUDA PARA NOVATA</h1>
     <p>Tudo que você precisa saber para arrasar no app 💖</p>
   </header>
 
   <main>
     <div class="intro">
       <p>Clique em qualquer tópico abaixo para ler o conteúdo. Simples assim! 🌷</p>
-    </div>
-
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="search" id="searchInput" placeholder="Buscar tópico..." aria-label="Buscar tópico" />
     </div>
 
     <div class="accordion" id="accordion">
@@ -649,16 +626,6 @@
             item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }, 100);
         }
-      });
-    });
-
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const q = this.value.toLowerCase().trim();
-      document.querySelectorAll('.item').forEach(item => {
-        const title = item.querySelector('.item-title').textContent.toLowerCase();
-        const keywords = (item.dataset.keywords || '').toLowerCase();
-        const content = item.querySelector('.item-body-inner').textContent.toLowerCase();
-        item.style.display = (!q || title.includes(q) || keywords.includes(q) || content.includes(q)) ? '' : 'none';
       });
     });
   </script>
